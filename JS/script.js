@@ -1,87 +1,116 @@
-// Seleccionar elementos 
-const menuIcon = document.getElementById('menu-icon');
-const sidebar = document.getElementById('sidebar');
-const closeBtn = document.getElementById('close-btn');
-
-// Mostrar la barra lateral
-menuIcon.addEventListener('click', () => {
-  sidebar.classList.add('active');
+// Particles Config
+particlesJS("particles-js", {
+    particles: {
+        number: { value: 50, density: { enable: true, value_area: 800 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 3 },
+        line_linked: { enable: true, distance: 150, color: "#ffffff" },
+        move: { enable: true, speed: 2 }
+    },
+    interactivity: {
+        detect_on: "canvas",
+        events: {
+            onhover: { enable: true, mode: "repulse" }
+        }
+    },
+    retina_detect: true
 });
 
-// Cerrar la barra lateral
-closeBtn.addEventListener('click', () => {
-  sidebar.classList.remove('active');
-});
+// Likes and Dislikes
+let likes = 16;
+let dislikes = 3;
 
-// Cerrar la barra lateral al seleccionar un enlace
-document.querySelectorAll('.sidebar a').forEach(link => {
-  link.addEventListener('click', () => {
-    sidebar.classList.remove('active');
-  });
-});
-
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-
-// Ajustar tamaño del lienzo
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const particlesArray = [];
-const numberOfParticles = 100;
-
-// Crear partículas
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 5 + 1;
-    this.speedX = Math.random() * 3 - 1.5;
-    this.speedY = Math.random() * 3 - 1.5;
-  }
-
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-
-    // Reposicionar partículas fuera del lienzo
-    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-  }
-
-  draw() {
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.closePath();
-    ctx.fill();
-  }
+function addLike() {
+    likes++;
+    document.getElementById('like-count').textContent = likes;
 }
 
-// Inicializar partículas
-function init() {
-  for (let i = 0; i < numberOfParticles; i++) {
-    particlesArray.push(new Particle());
-  }
+function addDislike() {
+    dislikes++;
+    document.getElementById('dislike-count').textContent = dislikes;
 }
 
-// Animar partículas
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particlesArray.forEach(particle => {
-    particle.update();
-    particle.draw();
-  });
-  requestAnimationFrame(animate);
-}
-
-init();
-animate();
-
-// Actualizar el tamaño del lienzo al cambiar el tamaño de la ventana
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  particlesArray.length = 0;
-  init();
+// Accordion
+document.querySelectorAll(".accordion-btn").forEach(button => {
+    button.addEventListener("click", () => {
+        button.nextElementSibling.style.display = 
+            button.nextElementSibling.style.display === "block" ? "none" : "block";
+    });
 });
+
+// Sidebar
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.style.left = sidebar.style.left === "0px" ? "-100%" : "0";
+}
+
+// Language Switch
+function switchLanguage() {
+    const lang = document.getElementById('language-switch').value;
+
+    const translations = {
+        en: {
+            title: "CD Hub Wiki",
+            description: "Find the answers you need for our mod and services.",
+            blogText: "Check out our <a href='https://blog.cdhub.store/'>mod blog</a> for detailed updates and features.",
+            discordText: "For better assistance or to purchase access keys, make sure you’re on our <a href='discord.gg/cdhub'>Discord server</a>.",
+            feedback: "Did this article help you?",
+            faq: "FAQ",
+            faqContent: "This section contains the frequently asked questions.",
+            install: "Installation Guide",
+            installContent: "Detailed guide for installing the mod.",
+            config: "Configuration",
+            configContent: "How to configure the mod for optimal use.",
+            trouble: "Troubleshooting",
+            troubleContent: "Fix common issues with our service.",
+            contact: "Contact Us",
+            contactContent: "Get in touch with us for support."
+        },
+        es: {
+            title: "CD Hub Wiki",
+            description: "Encuentra las respuestas que necesitas para nuestro mod y servicios.",
+            blogText: "Visita nuestro <a href='https://blog.cdhub.store/'>blog del mod</a> para actualizaciones detalladas y características.",
+            discordText: "Para mejor asistencia o comprar llaves de acceso, asegúrate de estar en nuestro <a href='discord.gg/cdhub'>servidor de Discord</a>.",
+            feedback: "¿Te sirvió este artículo?",
+            faq: "Preguntas Frecuentes",
+            faqContent: "Esta sección contiene las preguntas más frecuentes.",
+            install: "Guía de Instalación",
+            installContent: "Guía detallada para instalar el mod.",
+            config: "Configuración",
+            configContent: "Cómo configurar el mod para un uso óptimo.",
+            trouble: "Resolución de Problemas",
+            troubleContent: "Soluciona problemas comunes con nuestro servicio.",
+            contact: "Contáctanos",
+            contactContent: "Ponte en contacto con nosotros para soporte."
+        }
+    };
+
+    const elements = {
+        title: 'wiki-title',
+        description: 'wiki-description',
+        blogText: 'blog-text',
+        discordText: 'discord-text',
+        feedback: 'feedback-title',
+        faq: 'faq-btn',
+        faqContent: 'faq-content',
+        install: 'install-btn',
+        installContent: 'install-content',
+        config: 'config-btn',
+        configContent: 'config-content',
+        trouble: 'trouble-btn',
+        troubleContent: 'trouble-content',
+        contact: 'contact-btn',
+        contactContent: 'contact-content'
+    };
+
+    const selectedTranslations = translations[lang];
+
+    for (let key in elements) {
+        const element = document.getElementById(elements[key]);
+        if (element) {
+            element.innerHTML = selectedTranslations[key];
+        }
+    }
+}
