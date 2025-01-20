@@ -1,59 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  <!-- Open Graph meta tags for social sharing -->
-<meta property="og:title" content="CD Hub">
-<meta property="og:description" content="The official CD Hub wiki.">
-<meta property="og:image" content="https://wiki.cdhub.store/Images/logo.png">
-<meta property="og:url" content="https://wiki.cdhub.store/">
-<meta property="og:type" content="website">
-
-<!-- Twitter Card meta tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="CD Hub">
-<meta name="twitter:description" content="The official CD Hub wiki.">
-<meta name="twitter:image" content="https://wiki.cdhub.store/Images/logo.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CD Hub - Wiki</title>
-  <link rel="stylesheet" href="CSS/styles.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="Images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CD Hub - Wiki</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <script defer src="JS/script.js"></script>
 </head>
 <body>
-  <canvas id="particles"></canvas>
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="menu-icon" id="menu-icon">&#9776;</div>
-    <div class="links">
-      <a href="#">Home</a>
-    <a href="FAQs">FAQs</a>
-    <a href="Solutions">Solutions</a>
-    <a href="ToS">ToS</a>
+    <!-- Top Bar -->
+    <nav class="top-bar">
+        <div class="logo">CD Hub Wiki</div>
+        <div class="top-buttons">
+            <a href="home.html">Feedback</a>
+            <a href="about.html">Faqs</a>
+            <select id="language-switch" onchange="switchLanguage()">
+                <option value="en" selected>English</option>
+                <option value="es">Spanish</option>
+            </select>
+        </div>
+    </nav>
+
+    <!-- Sidebar for Mobile -->
+    <div id="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <a href="home.html">Feedback</a>
+        <a href="about.html">Faqs</a>
+        <select id="sidebar-language-switch" onchange="switchLanguage()">
+            <option value="en" selected>English</option>
+            <option value="es">Spanish</option>
+        </select>
     </div>
-  </div>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 
-  <!-- Sidebar for mobile -->
-  <div class="sidebar" id="sidebar">
-  <div class="close-btn" id="close-btn">&times;</div>
-<a href="#">Home</a>
-    <a href="FAQs">FAQs</a>
-    <a href="Solutions">Solutions</a>
-    <a href="ToS">ToS</a>
-  </div>
+    <div id="particles-js"></div>
+    <header>
+        <h1 id="wiki-title">CD Hub Wiki</h1>
+        <p id="wiki-description">Find the answers you need for our mod and services.</p>
+    </header>
+    <hr>
+    <main>
+        <section id="help">
+            <p id="blog-text">Check out our <a href="https://blog.cdhub.store/">mod blog</a> for detailed updates and features.</p>
+            <p id="discord-text">For better assistance or to purchase access keys, make sure you’re on our <a href="discord.gg/cdhub">Discord server</a>.</p>
+        </section>
 
-  <!-- Background animation -->
-  <div class="background"></div>
+        <!-- Accordion Menus -->
+        <div class="accordion">
+            <button class="accordion-btn" id="faq-btn">FAQ</button>
+            <div class="accordion-content" id="faq-content">This section contains the frequently asked questions.</div>
+            
+            <button class="accordion-btn" id="install-btn">Installation Guide</button>
+            <div class="accordion-content" id="install-content">Detailed guide for installing the mod.</div>
+            
+            <button class="accordion-btn" id="config-btn">Configuration</button>
+            <div class="accordion-content" id="config-content">How to configure the mod for optimal use.</div>
+            
+            <button class="accordion-btn" id="trouble-btn">Troubleshooting</button>
+            <div class="accordion-content" id="trouble-content">Fix common issues with our service.</div>
+            
+            <button class="accordion-btn" id="contact-btn">Contact Us</button>
+            <div class="accordion-content" id="contact-content">Get in touch with us for support.</div>
+        </div>
 
-  <!-- Main content -->
-  <div class="container">
-    <h1 class="title">Welcome to CD Hub Wiki</h1>
-    <p class="description">The official CD Hub wiki.</p>
-    <img class="image" src="Images/logo.png" alt="Placeholder Image">
-    <p class="content-text">This web are dedicated to help CD Hub users.</p>
-    <a href="About" class="btn">Learn More</a>
-  </div>
-
-  <script src="JS/script.js"></script>
+        <!-- Like/Dislike -->
+        <div class="feedback">
+            <h3 id="feedback-title">Did this article help you?</h3>
+            <div>
+                <button onclick="addLike()">👍</button>
+                <span id="like-count">0</span>
+                <button onclick="addDislike()">👎</button>
+                <span id="dislike-count">0</span>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
